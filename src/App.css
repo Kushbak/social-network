@@ -9,23 +9,4 @@
     width: 1200px;
 }
 
-header{
-    grid-area: h;
-    background: #383737;
-}
-header img{
-    width: 5%;
-}
 
-nav{
-    grid-area: n;
-    background: rgb(202, 49, 49);
-}
-
-.profile{
-    grid-area: c;
-    background: rgb(179, 163, 163);
-}
-.profile img{
-    width: 80%; 
-}

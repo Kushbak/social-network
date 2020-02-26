@@ -1,10 +1,11 @@
 import React from 'react';
+import p from './Profile.module.css';
 
 let Profile = () => {
     return (
-        <div className="profile">
+        <div className={p.profile}>
             <div>
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2dVxXUAlb2k%2Fmaxresdefault.jpg&f=1&nofb=1" alt="banner" />
+                <img className={p.banner} src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2dVxXUAlb2k%2Fmaxresdefault.jpg&f=1&nofb=1" alt="banner" />
             </div>
             <div>
                 ava + description
