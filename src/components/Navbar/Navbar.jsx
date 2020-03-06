@@ -1,20 +1,34 @@
 import React from 'react';
-import n from './Navbar.module.css';
+import css from './Navbar.module.css';
+import { NavLink } from 'react-router-dom';
+
 // css делают модулем чтобы классы были уникальными
-// n это ключ, а класс, которую добавили в css это значение, js берет значение таким образом(как на примере внизу) и отбирает уникальный класс
+// css это ключ, а класс, которую добавили в css это значение, js берет значение таким образом(как на примере внизу) и отбирает уникальный класс
+// NavLink - типа <a></a>, с e.preventDeafult и html api. Добавляет в url значение без перезагрузки
+// NavLink сам добавляет в активные ссылки active, а  activeClassName меняет ее на собственную, пример ниже
 
 let Navbar = () => {
     return (
-        <nav className={n.nav}>
-            <div><a className={`${n.item} ${n.active}`} href="#">Profile</a></div> 
-            <div><a className={n.item} href="#">Messages</a></div>
-            <div><a className={n.item} href="#">News</a></div>
-            <div><a className={n.item} href="#">Music</a></div>
-            <div><a className={n.item} href="#">Settings</a></div>
+        <nav className={css.nav}>
+            <div className={css.item}>
+                <NavLink to="/profile" activeClassName={css.activeLink}>Profile</NavLink>
+            </div>
+            <div className={css.item}>
+                <NavLink to="/dialogs" activeClassName={css.activeLink}>Messages</NavLink>
+            </div>
+            <div className={css.item}>
+                <NavLink to="/news" activeClassName={css.activeLink}>News</NavLink>
+            </div>
+            <div className={css.item}>
+                <NavLink to="/music" activeClassName={css.activeLink}>Music</NavLink>
+            </div>
+            <div className={css.item}>
+                <NavLink to="/settings" activeClassName={css.activeLink}>Settings</NavLink>
+            </div>
         </nav>
     )
 }
 
- // если нужно добавить несколько классов, пишем его в кавычки на букве ё
+// если нужно добавить несколько классов, пишем его в кавычки на букве ё
 
 export default Navbar;

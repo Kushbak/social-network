@@ -1,16 +1,12 @@
 import React from 'react';
-import p from './Profile.module.css';
+import css from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
+import Description from './Description/Description';
 
-let Profile = () => {
+const Profile = () => {
     return (
-        <div className={p.profile}>
-            <div>
-                <img className={p.banner} src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2dVxXUAlb2k%2Fmaxresdefault.jpg&f=1&nofb=1" alt="banner" />
-            </div>
-            <div>
-                ava + description
-            </div>
+        <div className={css.profile}>
+           <Description />
            <MyPosts />
         </div>
     )

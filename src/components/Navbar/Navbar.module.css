@@ -4,16 +4,15 @@ nav{
 }
 
 .nav{
-    padding-left: 20px;
-    padding-top: 20px;
+    padding: 20px;
 }
 
-.item{
+.item a{
     color: #fff;
     text-decoration: none;
     margin-bottom: 8px;
 }
 
-.active{
+.item a.activeLink{
     color: blue;
 }

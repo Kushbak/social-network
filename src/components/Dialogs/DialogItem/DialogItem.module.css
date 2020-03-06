@@ -1,0 +1,12 @@
+.dialogItem{ 
+    margin-bottom: 10px;
+}
+
+.dialogItem a{
+    text-decoration: none;
+    color: white;
+}
+
+.active{
+    color: yellow;
+}
