@@ -11,6 +11,8 @@ let postsData = [
     {id: 1, message:'Like my post please', likes: 0},
 ]
 
+let postsElements = postsData.map( p => <Post id={p.id} message={p.message} likes={p.likes + ' likes'} /> );
+
 
 // задаем значения для их динамического вывода с помощью props 
 const MyPosts = (props) => {
@@ -26,10 +28,7 @@ const MyPosts = (props) => {
                 </div>
             </div>
             <div className={css.postsBlock}> 
-                <Post id={postsData[0].id} message={postsData[0].message} likes={postsData[0].likes + ' likes'} /> 
-                <Post id={postsData[1].id} message={postsData[1].message} likes={postsData[1].likes + ' likes'} /> 
-                <Post id={postsData[2].id} message={postsData[2].message} likes={postsData[2].likes + ' likes'} /> 
-                <Post id={postsData[3].id} message={postsData[3].message} likes={postsData[3].likes + ' likes'} /> 
+                 { postsElements }
             </div>
         </div>
     )
