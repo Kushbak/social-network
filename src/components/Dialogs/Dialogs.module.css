@@ -1,5 +1,26 @@
+/* dialogBlock */
 .dialogBlock{
     display: grid;
     grid-template-columns: 1fr 8fr;
     padding: 20px;
+}
+
+/* messages */
+.message{
+    padding: 10px 0; 
+}
+
+
+/* dialogItem */
+.dialogItem{ 
+    margin-bottom: 10px;
+}
+
+.dialogItem a{
+    text-decoration: none;
+    color: white;
+}
+
+.active{
+    color: yellow;
 }
