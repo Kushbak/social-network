@@ -11,16 +11,16 @@ import MessageItem from './MessagesItem/MessagesItem';
 
 let Dialogs = (props) => {   
     
-let dialogsElements = props.state.dialogsData.map(d => <DialogItem id={d.id} user={d.user}/> );
+let dialogsElements = props.state.dialogsData.map(d => <DialogItem id={d.id} avatar={d.avatar} user={d.user}/> );
 let messagesElements = props.state.messagesData.map( m => <MessageItem id={m.id} message={m.message} /> )
 
     return(
-        <div className={css.dialogBlock}> 
-            <div className="dialogs">
+        <div className={css.dialogPage}> 
+            <div className={css.dialogsBlock}>
                  { dialogsElements }
             </div>
 
-            <div className={css.messages}> 
+            <div className={css.messagesBlock}> 
                 { messagesElements }
             </div>
         </div>

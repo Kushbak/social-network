@@ -1,13 +1,31 @@
 .item{
+    display: grid;
+    grid-template-areas: 
+    "a m"
+    "l m";
+    grid-template-columns: 1fr 8fr; 
     padding: 10px 20px;
-    margin: 10px  20px;
-    border: 1px solid rgba(0 ,0 ,0 , 0.8);
-    border-radius: 20px;
+    margin: 10px  20px; 
+    background: #F5E5E5;
 }
 
-.item img{
+.avatar{
+    grid-area: a;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%; 
+}
+.message{
+    grid-area: m;
+}
+
+.likes{
+    grid-area: l; 
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.likes img{
+    margin: 0;
     width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    margin-right: 20px;
 }

@@ -9,10 +9,11 @@ import Post from './Post/Post';
 
  
 const MyPosts = (props) => {
-    let postsElements = props.postsData.map( p => <Post id={p.id} message={p.message} likes={p.likes + ' likes'} /> );
+    let postsElements = props.postsData.map( p => <Post id={p.id} message={p.message} likes={p.likes} /> );
 
 
     return (
+        
         <div className={css.postsWrapper}>
             <h3>My posts</h3>
             <div className={css.addPost}>
