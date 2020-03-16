@@ -7,14 +7,38 @@
 
 /* messagesBlock */
 .messagesBlock{
+    display: grid;
+    grid-template-rows: 10fr 1fr;
     padding: 20px;
+
 }
+
+
 .message{
     padding: 10px; 
     margin: 10px 0;
     background: #e5e5e5;
 }
 
+.sendBlock{
+    display: flex;
+    align-items: center;
+}
+.sendBlock textarea{
+    width: 85%;
+    height: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+
+}
+.sendBlock button{
+    width: 15%;
+    margin-left: 20px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
 
 /* dialogsBlock */  
 .dialogsBlock{

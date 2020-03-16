@@ -9,3 +9,25 @@ h3{
 .postsBlock{
     margin-top: 30px;  
 }
+
+.addPost{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.addPost textarea{
+    width: 50%;
+    height: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px; 
+}
+
+.addPost button{
+    width: 10%;
+    height: 30px;
+    margin-left: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
