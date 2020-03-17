@@ -1,6 +1,8 @@
 import React from 'react';
 import css from './MyPosts.module.css';
 import Post from './Post/Post';
+import {onChangePostInputValueActionCreator, addPostActionCreator} from './../../../redux/state';
+
  
 // createRef - создание ссылки к которому нужно обратиться за value, не используя DOM
 // задаем ref как ссылку туда и обращаемся с функцией
@@ -11,15 +13,13 @@ const MyPosts = (props) => {
 
     let newPostElement = React.createRef();
 
-    let addPost = () => {
-        let text= newPostElement.current.value;   
-        props.addPost(text);
-        props.updatePostInput(''); 
+    let addPost = () => { 
+        props.dispatch(addPostActionCreator());
     }
 
     let onChangeInputValue = () =>{ 
         let text = newPostElement.current.value;    
-        props.updatePostInput(text);  
+        props.dispatch(onChangePostInputValueActionCreator(text));
     }
 
     return (
@@ -27,6 +27,7 @@ const MyPosts = (props) => {
         <div className={css.postsWrapper}>
             
             <div className={css.addPost}>  
+                <div className={css.cannotSend}></div>
                 <textarea ref={newPostElement} onChange={onChangeInputValue} value={props.postInputValue} /> 
                 <button onClick={addPost} >add post</button>  
             </div>

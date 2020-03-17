@@ -18,11 +18,9 @@ let App = (props) => {
                <Navbar />
                <div className="app-wrapper-content">
                     <Route path='/profile'   render={ () => <Profile profilePage={props.state.profilePage}  
-                                                                                          updatePostInput={props.updatePostInput} 
-                                                                                          addPost={props.addPost}/> } />
+                                                                                          dispatch={props.dispatch}/> } />
                     <Route path='/dialogs'  render={ () => <Dialogs state={props.state.dialogsPage}  
-                                                                                          addMessage={props.addMessage} 
-                                                                                          updateMessageInput={props.updateMessageInput} /> } />  
+                                                                                          dispatch={props.dispatch} /> } />  
                     <Route path='/news'     render={ () => <News /> } />  
                     <Route path='/music'    render={ () => <Music /> } />  
                     <Route path='/settings' render={ () => <Settings /> } />  

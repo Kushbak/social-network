@@ -2,6 +2,7 @@ import React from 'react';
 import css from './Dialogs.module.css';   
 import DialogItem from './DialogItem/DialogItem'; 
 import MessageItem from './MessagesItem/MessagesItem';
+import {onChangeMessageInputValueActionCreator, addMessageActionCreator} from './../../redux/state';
 
 
 // map - изменение некоторых элементов массива и присваивание его в другую переменную
@@ -15,16 +16,15 @@ let dialogsElements = props.state.dialogsData.map(d => <DialogItem id={d.id} ava
 let messagesElements = props.state.messagesData.map( m => <MessageItem id={m.id} message={m.message} /> )
 
 let newPostElement = React.createRef();
-let addMessage = () => {
-    let text = newPostElement.current.value; 
-    props.addMessage(text);
+let addMessage = () => { 
+    props.dispatch(addMessageActionCreator());
     newPostElement.current.value = '';
 }
 
 
 let onChangeInputValue = () =>{ 
     let text = newPostElement.current.value;    
-    props.updateMessageInput(text);  
+    props.dispatch(onChangeMessageInputValueActionCreator(text));
 }
 
     return(
