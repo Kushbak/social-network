@@ -2,7 +2,7 @@ import React from 'react';
 import css from './Dialogs.module.css';   
 import DialogItem from './DialogItem/DialogItem'; 
 import MessageItem from './MessagesItem/MessagesItem';
-import {onChangeMessageInputValueActionCreator, addMessageActionCreator} from './../../redux/state';
+import {onChangeMessageInputValueActionCreator, addMessageActionCreator} from './../../redux/dialogsReducer';
 
 
 // map - изменение некоторых элементов массива и присваивание его в другую переменную
@@ -11,21 +11,21 @@ import {onChangeMessageInputValueActionCreator, addMessageActionCreator} from '.
 // разметка возвращается до тех пор с разными данными пока они не закончатся   
 
 let Dialogs = (props) => {   
-    
-let dialogsElements = props.state.dialogsData.map(d => <DialogItem id={d.id} avatar={d.avatar} user={d.user}/> );
-let messagesElements = props.state.messagesData.map( m => <MessageItem id={m.id} message={m.message} /> )
+ 
+    let dialogsElements = props.state.dialogsData.map(d => <DialogItem id={d.id} avatar={d.avatar} user={d.user}/> );
+    let messagesElements = props.state.messagesData.map( m => <MessageItem id={m.id} message={m.message} /> )
 
-let newPostElement = React.createRef();
-let addMessage = () => { 
-    props.dispatch(addMessageActionCreator());
-    newPostElement.current.value = '';
-}
+    let newPostElement = React.createRef();
+    let addMessage = () => { 
+        props.addMessage();
+        newPostElement.current.value = '';
+    }
 
 
-let onChangeInputValue = () =>{ 
-    let text = newPostElement.current.value;    
-    props.dispatch(onChangeMessageInputValueActionCreator(text));
-}
+    let onChangeInputValue = (e) =>{ 
+        let text = newPostElement.current.value;     
+        props.onChangeMessageInputValue(text);
+    }
 
     return(
         <div className={css.dialogPage}> 
