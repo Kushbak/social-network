@@ -1,3 +1,6 @@
+import { profileReducer } from "./profileReducer";
+import { dialogsReducer } from "./dialogsReducer";
+
 let store = { 
     _rerenderDOM() {
         console.log('State changed');
@@ -41,86 +44,14 @@ let store = {
     },
 
     dispatch(action) {
-        if(action.type === 'ADD-POST'){
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.postInputValue,
-                likes: 0 
-            };
-            
-            if(this._state.profilePage.postInputValue == '' || this._state.profilePage.postInputValue == ' '){
-                this._state.profilePage.postInputValue = 'Введите хотябы 1 символ';
-              
-            }  else {
-                this._state.profilePage.postsData.push(newPost);   
-            } 
-            this._state.profilePage.postInputValue = '';
-            this._rerenderDOM(this._state);
 
-        } else if(action.type === 'UPDATE-POST-INPUT'){
-            this._state.profilePage.postInputValue = action.textareaValue;
-            this._rerenderDOM(this._state);
-
-        } else if(action.type === 'ADD-MESSAGE'){
-            let newMessage = {
-                id: 4,
-                message: this._state.dialogsPage.messageInputValue
-            }; 
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
         
-            this._state.dialogsPage.messagesData.push(newMessage);
-            this. _rerenderDOM(this._state);
-
-        } else if(action.type === 'UPDATE-MESSAGE-INPUT'){
-            this._state.dialogsPage.messageInputValue = action.textareaValue;
-            this._rerenderDOM(this._state);
-        }
-    },
-
-    addPost() { 
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.postInputValue,
-            likes: 0 
-        };
-        
-        if(this._state.profilePage.postInputValue == '' || this._state.profilePage.postInputValue == ' '){
-            this._state.profilePage.postInputValue = 'Введите хотябы 1 символ';
-          
-        }  else {
-            this._state.profilePage.postsData.push(newPost);   
-        } 
-        this._state.profilePage.postInputValue = '';
-        this._rerenderDOM(this._state);
-    },
-
-    updatePostInput(textareaValue) {  
-        this._state.profilePage.postInputValue = textareaValue;
-        this._rerenderDOM(this._state);
-    },
-    
-   addMessage(messageValue) { 
-        let newMessage = {
-            id: 4,
-            message: messageValue
-        }; 
-    
-        this._state.dialogsPage.messagesData.push(newMessage);
-        this. _rerenderDOM(this._state);
-    },
-
-    updateMessageInput(textareaValue) {  
-        this._state.profilePage.messageInputValue = textareaValue;
         this._rerenderDOM(this._state);
     }
- 
-    
+
 }
 
-
-
-export const addPostActionCreator = () => ({ type: 'ADD-POST'});
-export const onChangePostInputValueActionCreator = (text) => ({ type: 'UPDATE-POST-INPUT', textareaValue: text }); 
-export const addMessageActionCreator = () => ({ type: 'ADD-MESSAGE' });
-export const onChangeMessageInputValueActionCreator = (text) => ({ type: 'UPDATE-MESSAGE-INPUT', textareaValue: text });
 
 export default store;
