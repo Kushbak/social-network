@@ -1,0 +1,52 @@
+.block{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    padding: 20px;
+    margin: 10px;
+    background: #e5e5e5;
+    border-radius: 10px;
+}
+
+.avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    margin: 10px;
+}
+
+.isFollowBtn, .isUnfollowBtn{
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 10px auto;
+    padding: 10px;
+}
+.isFollowBtn{
+    background: #d51d48;
+}
+.isUnfollowBtn{
+    background: green;
+}
+.descrBlock{
+    display: grid;
+    grid-template-areas: 'f f l'
+                         's s l';
+    padding: 10px;
+}
+.fullName{
+    font-size: 22px;
+    grid-template: 'f';
+}
+
+.status{
+    grid-template: 's';
+
+}
+
+.location{
+    padding: 10px;
+    grid-template: 'l';
+}
+
