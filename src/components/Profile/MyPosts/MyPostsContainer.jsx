@@ -1,24 +1,28 @@
 import React from 'react';  
 import {onChangePostInputValueActionCreator, addPostActionCreator} from '../../../redux/profileReducer';
-import MyPosts from './MyPosts';
+import MyPosts from './MyPosts'; 
+import { connect } from 'react-redux';
+ 
 
- 
-// createRef - создание ссылки к которому нужно обратиться за value, не используя DOM
-// задаем ref как ссылку туда и обращаемся с функцией
-// при клике на addPost вызывается функция, которая берет значения из textarea, ссылка которой действует с ref
- 
-const MyPostsContainer = (props) => {  
- 
-    let state = props.store.getState().profilePage;
-    let addPost = () => { 
-        props.store.dispatch(addPostActionCreator());
+
+const mapStateToProps = (state) => {
+    return{
+        state: state,
+        postInputValue: state.profilePage.postInputValue
     }
+};
 
-    let onChangeInputValue = (text) =>{  
-        props.store.dispatch(onChangePostInputValueActionCreator(text));
+const mapDispatchToProps = (dispatch) => {
+    return{
+        addPost: () => {
+            dispatch(addPostActionCreator());
+        },
+        onChangeInputValue: (text) => {
+            dispatch(onChangePostInputValueActionCreator(text));
+        }
     }
+};
 
-    return  <MyPosts addPost={addPost}  onChangeInputValue={onChangeInputValue} state={state}/>
-}
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 export default MyPostsContainer;
