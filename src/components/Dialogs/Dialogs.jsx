@@ -11,9 +11,9 @@ import {onChangeMessageInputValueActionCreator, addMessageActionCreator} from '.
 // разметка возвращается до тех пор с разными данными пока они не закончатся   
 
 let Dialogs = (props) => {   
- 
-    let dialogsElements = props.state.dialogsData.map(d => <DialogItem id={d.id} avatar={d.avatar} user={d.user}/> );
-    let messagesElements = props.state.messagesData.map( m => <MessageItem id={m.id} message={m.message} /> )
+    let state = props.state.dialogsPage;
+    let dialogsElements = state.dialogsData.map(d => <DialogItem id={d.id} key={d.id} avatar={d.avatar} user={d.user}/> );
+    let messagesElements = state.messagesData.map( m => <MessageItem id={m.id} key={m.id} message={m.message} /> )
 
     let newPostElement = React.createRef();
     let addMessage = () => { 

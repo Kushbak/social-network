@@ -10,8 +10,8 @@ import {onChangePostInputValueActionCreator, addPostActionCreator} from './../..
  
 const MyPosts = (props) => { 
 
-
-    let postsElements = props.state.postsData.map( p => <Post id={p.id} message={p.message} likes={p.likes} /> );
+    let state = props.state.profilePage;
+    let postsElements = state.postsData.map( p => <Post id={p.id} key={p.id} message={p.message} likes={p.likes} /> );
 
     let newPostElement = React.createRef();
 
@@ -19,7 +19,7 @@ const MyPosts = (props) => {
         props.addPost();
     }
 
-    let onChangeInputValue = () =>{ 
+    let onChangeInputValue = () => { 
         let text = newPostElement.current.value;    
         props.onChangeInputValue(text);
     }
@@ -30,7 +30,7 @@ const MyPosts = (props) => {
             
             <div className={css.addPost}>  
                 <div className={css.cannotSend}></div>
-                <textarea ref={newPostElement} onChange={onChangeInputValue} value={props.state.postInputValue} /> 
+                <textarea ref={newPostElement} onChange={onChangeInputValue} value={props.state.profilePage.postInputValue} /> 
                 <button onClick={addPost} >add post</button>  
             </div>
             <div className={css.postsBlock}> 
@@ -38,6 +38,7 @@ const MyPosts = (props) => {
             </div>
         </div>
     )
+    debugger
 }
 
 export default MyPosts;
