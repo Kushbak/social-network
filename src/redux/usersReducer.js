@@ -1,12 +1,9 @@
 let initialState = {
-    users: [
-        // {id: 1, avatarURL: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.akamai.steamstatic.com%2Fsteamcommunity%2Fpublic%2Fimages%2Favatars%2Fdc%2Fdc1574232f8aaac87fd86575ccb94c06ff35cebc_full.jpg&f=1&nofb=1', 
-        // isFollow: true, fullName: 'User Name1', about: 'some words about me', location:{city: 'Osh', country: 'Kyrgyzstan'} },
-        // {id: 2, avatarURL: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.akamai.steamstatic.com%2Fsteamcommunity%2Fpublic%2Fimages%2Favatars%2Fdc%2Fdc1574232f8aaac87fd86575ccb94c06ff35cebc_full.jpg&f=1&nofb=1', 
-        // isFollow: true, fullName: 'User Name2', about: 'some words about me', location:{city: 'Osh', country: 'Kyrgyzstan'} },
-        // {id: 3, avatarURL: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.akamai.steamstatic.com%2Fsteamcommunity%2Fpublic%2Fimages%2Favatars%2Fdc%2Fdc1574232f8aaac87fd86575ccb94c06ff35cebc_full.jpg&f=1&nofb=1', 
-        // isFollow: true, fullName: 'User Name3', about: 'some words about me', location:{city: 'Osh', country: 'Kyrgyzstan'} }
-    ] 
+    users: [],
+    pagesSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1 ,
+    isFetching: true
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -32,7 +29,19 @@ export const usersReducer = (state = initialState, action) => {
             })
         }
         case 'SET-USERS':{
-            return { ...state, users: [ ...state.users, ...action.users] }
+            return {  ...state, users: action.users }
+        }
+
+        case 'SET-CURRENT-PAGE':{
+            return { ...state, currentPage: action.currentPage }
+        }
+
+        case 'SET-TOTAL-USERS-COUNT':{
+            return { ...state, totalUsersCount: action.count }
+        }
+
+        case 'SET_IS_FETCHING':{
+            return { ...state, isFetching: action.isFetching }
         }
 
         default:
@@ -42,6 +51,9 @@ export const usersReducer = (state = initialState, action) => {
 }
 
 
-export const FollowAC = (userID) => ({ type: 'FOLLOW', userID});
-export const UnfollowAC = (userID) => ({ type: 'UNFOLLOW', userID }); 
-export const setUsersAC = (users) => ({ type: 'SET-USERS', users   }); 
+export const follow = (userID) => ({ type: 'FOLLOW', userID});
+export const unfollow = (userID) => ({ type: 'UNFOLLOW', userID }); 
+export const setUsers = (users) => ({ type: 'SET-USERS', users   }); 
+export const setCurrentPage = (page) => ({ type: 'SET-CURRENT-PAGE', currentPage: page  }); 
+export const setTotalUsersCount = (totalUsersCount) => ({ type: 'SET-TOTAL-USERS-COUNT', count: totalUsersCount  }); 
+export const toggleIsFetching = (isFetching) => ({ type: 'SET_IS_FETCHING', isFetching  }); 
