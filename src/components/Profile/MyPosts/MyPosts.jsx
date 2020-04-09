@@ -1,44 +1,39 @@
 import React from 'react';
 import css from './MyPosts.module.css';
 import Post from './Post/Post';
-import {onChangePostInputValueActionCreator, addPostActionCreator} from './../../../redux/profileReducer';
+import {reduxForm, Field} from 'redux-form';
 
- 
-// createRef - создание ссылки к которому нужно обратиться за value, не используя DOM
-// задаем ref как ссылку туда и обращаемся с функцией
-// при клике на addPost вызывается функция, которая берет значения из textarea, ссылка которой действует с ref
+
+const myPostsForm = (props) => {
+    return(
+        <form onSubmit={props.handleSubmit}>
+            <Field component="textarea" name="postsinput" />
+            <button>add post</button>
+        </form>
+    )
+} 
+
+const PostsFormRedux = reduxForm({form: 'postsForm'})(myPostsForm);
  
 const MyPosts = (props) => { 
 
     let state = props.state.profilePage;
     let postsElements = state.postsData.map( p => <Post id={p.id} key={p.id} message={p.message} likes={p.likes} /> );
 
-    let newPostElement = React.createRef();
-
-    let addPost = () => { 
-        props.addPost();
-    }
-
-    let onChangeInputValue = () => { 
-        let text = newPostElement.current.value;    
-        props.onChangeInputValue(text);
-    }
+    let addPost = (values) => { 
+        props.addPost(values.postsinput);
+    } 
 
     return (
-        
         <div className={css.postsWrapper}>
-            
-            <div className={css.addPost}>  
-                <div className={css.cannotSend}></div>
-                <textarea ref={newPostElement} onChange={onChangeInputValue} value={props.state.profilePage.postInputValue} /> 
-                <button onClick={addPost} >add post</button>  
+            <div className={css.addPost}>
+                <PostsFormRedux onSubmit={addPost} />
             </div>
             <div className={css.postsBlock}> 
                  { postsElements }
             </div>
         </div>
     )
-    debugger
 }
 
 export default MyPosts;
