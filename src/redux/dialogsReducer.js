@@ -1,5 +1,4 @@
 let initialState = {
-    messageInputValue: '',
     dialogsData: [
         {id: 1, user: 'user 1', avatar: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Ffc07.deviantart.net%2Ffs70%2Fi%2F2010%2F246%2F0%2F3%2Fsteam_avatar_pack_by_radioactivenemofish-d2xx5mm.jpg&f=1&nofb=1'},
         {id: 2, user: 'user 2', avatar: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Ffc07.deviantart.net%2Ffs70%2Fi%2F2010%2F246%2F0%2F3%2Fsteam_avatar_pack_by_radioactivenemofish-d2xx5mm.jpg&f=1&nofb=1'},
@@ -21,7 +20,7 @@ export const dialogsReducer = (state = initialState, action) => {
         case 'ADD-MESSAGE':{
             let newMessage = {
                 id: 4,
-                message: state.messageInputValue
+                message: action.messageValue
             }; 
 
             return{
@@ -29,13 +28,7 @@ export const dialogsReducer = (state = initialState, action) => {
                 messagesData: [...state.messagesData, newMessage],
                 messageInputValue: ''
             }
-        }
-        case 'UPDATE-MESSAGE-INPUT':{
-            return {
-                ...state,
-                messageInputValue: action.textareaValue
-            } 
-        }
+        } 
         default:
             return state;
     } 
@@ -43,5 +36,4 @@ export const dialogsReducer = (state = initialState, action) => {
 };
 
 
-export const addMessageActionCreator = () => ({ type: 'ADD-MESSAGE' });
-export const onChangeMessageInputValueActionCreator = (text) => ({ type: 'UPDATE-MESSAGE-INPUT', textareaValue: text });
+export const addMessageActionCreator = (messageValue) => ({ type: 'ADD-MESSAGE', messageValue });

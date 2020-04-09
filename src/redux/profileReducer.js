@@ -5,7 +5,8 @@ let initialState = {
         {id: 2, message:'It is my first post', likes: 24},
         {id: 3, message:'It is my second post and I wanna experiment with it', likes: 10},
         {id: 4, message:'Like my post please', likes: 0},
-    ] 
+    ] ,
+    profile: null
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -13,20 +14,19 @@ export const profileReducer = (state = initialState, action) => {
         case 'ADD-POST':{
             let newPost = {
                 id: 5,
-                message: state.postInputValue,
+                message: action.postsInput,
                 likes: 0 
             };
-            
             return{
                 ...state,
                 postsData: [...state.postsData, newPost],
                 postInputValue: ''
             }
-        }
-        case 'UPDATE-POST-INPUT':{
+        } 
+        case 'SET_USER_PROFILE':{
             return{
                 ...state,
-                postInputValue: action.textareaValue
+                profile: action.profile
             }
         }
         default:
@@ -36,5 +36,5 @@ export const profileReducer = (state = initialState, action) => {
 }
 
 
-export const addPostActionCreator = () => ({ type: 'ADD-POST'});
-export const onChangePostInputValueActionCreator = (text) => ({ type: 'UPDATE-POST-INPUT', textareaValue: text }); 
+export const addPostActionCreator = (postsInput) => ({ type: 'ADD-POST', postsInput});
+export const setUserProfile = (profile) => ({ type: 'SET_USER_PROFILE', profile});
