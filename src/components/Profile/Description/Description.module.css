@@ -14,3 +14,10 @@
     position: absolute;
     z-index: 1;
 }
+.avatar{
+    width: 250px;
+}
+
+.avatar img{
+    width: 100%;
+}
