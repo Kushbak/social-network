@@ -2,6 +2,15 @@
     width: 100%;
     height: 300px; 
 }
+
+.descrWrapper{
+    position: relative;
+    z-index: 2;
+}
 .descrBlock{
     padding: 20px;
+}
+.bannerBlock{
+    position: absolute;
+    z-index: 1;
 }

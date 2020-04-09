@@ -6,7 +6,7 @@ import Description from './Description/Description';
 const Profile = (props) => { 
     return (
         <div className={css.profile}>
-           <Description />
+           <Description profile={props.profile} />
            <MyPostsContainer />
         </div>
     )

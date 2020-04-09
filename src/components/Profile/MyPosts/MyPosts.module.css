@@ -10,21 +10,21 @@ h3{
     margin-top: 30px;  
 }
 
-.addPost{
+.addPost form{
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.addPost textarea{
+.addPost form textarea{
     width: 50%;
     height: 30px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 5px; 
 }
 
-.addPost button{
+.addPost form button{
     width: 10%;
     height: 30px;
     margin-left: 20px;
