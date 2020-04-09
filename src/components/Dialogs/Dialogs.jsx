@@ -4,6 +4,8 @@ import DialogItem from './DialogItem/DialogItem';
 import MessageItem from './MessagesItem/MessagesItem';
 import {reduxForm, Field} from 'redux-form';
 
+
+
 const DialogsForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
