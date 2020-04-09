@@ -1,9 +1,14 @@
+import {usersApi} from '../api/api';
+
 let initialState = {
     users: [],
-    pagesSize: 5,
+    pagesSize: 12,
     totalUsersCount: 0,
     currentPage: 1 ,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: [
+
+    ]
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -43,6 +48,14 @@ export const usersReducer = (state = initialState, action) => {
         case 'SET_IS_FETCHING':{
             return { ...state, isFetching: action.isFetching }
         }
+        case 'SET_IS_FOLLOWING_IN_PROGRESS':{
+            return { 
+                ...state, 
+                followingInProgress: action.isFetching
+                ?  [...state.followingInProgress, action.userId]
+                :  state.followingInProgress.filter(id => id != action.userId)
+            }
+        }
 
         default:
             return state;
@@ -57,3 +70,17 @@ export const setUsers = (users) => ({ type: 'SET-USERS', users   });
 export const setCurrentPage = (page) => ({ type: 'SET-CURRENT-PAGE', currentPage: page  }); 
 export const setTotalUsersCount = (totalUsersCount) => ({ type: 'SET-TOTAL-USERS-COUNT', count: totalUsersCount  }); 
 export const toggleIsFetching = (isFetching) => ({ type: 'SET_IS_FETCHING', isFetching  }); 
+export const toggleIsFollowingProgress = (isFetching, userId) => ({ type: 'SET_IS_FOLLOWING_IN_PROGRESS', isFetching, userId  }); 
+
+
+export const getUsers = (currentPage, pagesSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        usersApi.getUsers(currentPage, pagesSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setTotalUsersCount(data.totalCount));
+                dispatch(setUsers(data.items));
+            });
+    }
+}
