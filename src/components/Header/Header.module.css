@@ -1,7 +1,20 @@
 header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     grid-area: h;
     background: #383737;
+    padding: 0 20px;
 }
 .logo{
     width: 5%;
+}
+
+.loginBlock{
+
+}
+
+.loginBlock a{
+    color: wheat;
+    text-decoration: none;
 }
