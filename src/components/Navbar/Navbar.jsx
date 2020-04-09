@@ -28,6 +28,9 @@ let Navbar = () => {
             <div className={css.item}>
                 <NavLink to="/settings" activeClassName={css.activeLink}>Settings</NavLink>
             </div>
+            <div className={css.item}>
+                <NavLink to="/login" activeClassName={css.activeLink}>Login</NavLink>
+            </div>
         </nav>
     )
 }
