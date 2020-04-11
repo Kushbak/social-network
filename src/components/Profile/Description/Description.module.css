@@ -1,23 +1,26 @@
-.banner{
-    width: 100%;
-    height: 300px; 
-}
-
-.descrWrapper{
-    position: relative;
-    z-index: 2;
-}
-.descrBlock{
+.descrWrapper{ 
+    display: flex;
     padding: 20px;
-}
-.bannerBlock{
-    position: absolute;
-    z-index: 1;
-}
-.avatar{
-    width: 250px;
-}
+}  
 
+.avatar{
+    padding: 20px;
+    width: 250px;
+} 
 .avatar img{
     width: 100%;
+}
+
+.aboutMe{
+    padding: 20px;
+
+} 
+.aboutMe .userName{
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 10px;
+}
+.aboutMe .statusBlock{ 
+    font-size: 18px;
+    margin-top: 10px;
 }
