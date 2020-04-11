@@ -3,6 +3,8 @@ import Dialogs from './Dialogs'
 import { addMessageActionCreator } from '../../redux/dialogsReducer'; 
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 
@@ -14,11 +16,9 @@ class DialogsContainer extends React.Component {
     };
 }
 
-
 const mapStateToProps = (state) => {
     return{
-        state: state,
-        isAuth: state.auth.isAuth
+        state: state
     }
 };
 
@@ -30,5 +30,9 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DialogsContainer);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(DialogsContainer) ;
+ 
  
