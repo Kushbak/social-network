@@ -11,7 +11,7 @@ const LoginForm = (props) => {
                 <Field component='input' type='text' placeholder='Email' name='email'/>
             </div>
             <div>
-                <Field component='input' type='password' placeholder='Пароль' name='password' type='password'/>
+                <Field component='input' type='password' placeholder='Пароль' name='password'/>
             </div>
             <div>
                 <Field component='input' type='checkbox' name='rememberMe'/>Remember me
@@ -26,7 +26,7 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 const Login = (props) => {
-    const onSubmit = (formData) =>{
+    const onSubmit = (formData) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 
