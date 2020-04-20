@@ -8,7 +8,7 @@ import { compose } from 'redux';
 
 
 class ProfileContainer extends React.Component {
-    componentDidMount() {
+    componentDidMount() {        
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = 7036;
@@ -17,13 +17,13 @@ class ProfileContainer extends React.Component {
     }
 
     render() { 
-        return <Profile onChangeCurrentPage={this.onChangeCurrentPage} {...this.props} />
+        return <Profile {...this.props} />
     };
 }
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profilePage.profile
+        profile: state.auth.profile
     }
 }; 
 
