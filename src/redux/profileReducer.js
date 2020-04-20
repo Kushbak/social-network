@@ -1,4 +1,5 @@
 import { usersApi } from "../api/api";
+import { toggleIsFetching } from "./usersReducer";
 
 let initialState = {
     postInputValue: '',
@@ -45,6 +46,7 @@ export const setUserProfile = (profile) => ({ type: 'SET_USER_PROFILE', profile 
 export const getUserProfile = (userId) => (dispatch) => {
     usersApi.getUser(userId)
         .then(response => {
+            dispatch(toggleIsFetching(false));
             dispatch(setUserProfile(response.data))
         });
 }
