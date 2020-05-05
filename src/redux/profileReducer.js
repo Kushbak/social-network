@@ -9,7 +9,8 @@ let initialState = {
         { id: 3, message: 'It is my second post and I wanna experiment with it', likes: 10 },
         { id: 4, message: 'Like my post please', likes: 0 },
     ],
-    profile: null
+    profile: null,
+    status: null
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -32,6 +33,12 @@ export const profileReducer = (state = initialState, action) => {
                 profile: action.profile
             }
         }
+        case 'SET_STATUS': {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         default:
             return state;
     }
@@ -41,6 +48,7 @@ export const profileReducer = (state = initialState, action) => {
 
 export const addPostActionCreator = (postsInput) => ({ type: 'ADD-POST', postsInput });
 export const setUserProfile = (profile) => ({ type: 'SET_USER_PROFILE', profile });
+export const setStatusSuccess = (status) => ({ type: 'SET_STATUS', status });
 
 
 export const getUserProfile = (userId) => (dispatch) => {
@@ -49,5 +57,20 @@ export const getUserProfile = (userId) => (dispatch) => {
             dispatch(toggleIsFetching(false));
             dispatch(setUserProfile(response.data))
         });
+}
+
+
+export const getStatus = (userId) => (dispatch) => {
+    debugger
+    usersApi.getUserStatus(userId)
+        .then(response => {
+            debugger
+            dispatch(setStatusSuccess(response.data))
+        });
+}
+
+export const updateStatus = (status) => (dispatch) => {
+    debugger
+    usersApi.updateStatus(status) 
 }
 

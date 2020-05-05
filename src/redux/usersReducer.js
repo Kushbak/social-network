@@ -73,14 +73,15 @@ export const toggleIsFetching = (isFetching) => ({ type: 'SET_IS_FETCHING', isFe
 export const toggleIsFollowingProgress = (isFetching, userId) => ({ type: 'SET_IS_FOLLOWING_IN_PROGRESS', isFetching, userId });
 
 
-export const getUsers = (currentPage, pagesSize) => (dispatch) => {
+export const requestUsers = (currentPage, pagesSize) => (dispatch) => {
     dispatch(toggleIsFetching(true));
-    usersApi.getUsers(currentPage, pagesSize)
+    usersApi.requestUsers(currentPage, pagesSize)
         .then(data => {
-            dispatch(toggleIsFetching(false));
+            dispatch(setCurrentPage(currentPage));
             dispatch(setTotalUsersCount(data.totalCount));
             dispatch(setUsers(data.items));
-        });
+            dispatch(toggleIsFetching(false));
+        }); 
 };
 export const follow = (userId) => (dispatch) => {
     dispatch(toggleIsFollowingProgress(true, userId));

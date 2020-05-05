@@ -23,7 +23,6 @@ export const initializedSuccess = () => ({ type: 'INITIALIZED_SUCCESS' });
 
 export const initializeApp = () => (dispatch) => {
     let promise = dispatch(authUserDataThunk())
-    debugger
     promise.then(() => {
         dispatch(initializedSuccess())
     });

@@ -3,10 +3,11 @@ import styles from '../Description.module.css'
 
 class ProfileStatus extends React.Component {
     state = {
-        editProfile: false
+        editProfile: false,
+        status: this.props.status
     }
 
-    activateEditProfile() {
+    activateEditProfile = () => {
         this.setState({
             editProfile: true
         })
@@ -16,23 +17,36 @@ class ProfileStatus extends React.Component {
         this.setState({
             editProfile: false
         })
+        this.props.updateStatus(this.state.status);
+    }
+
+    onChangeStatus = (e) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.status !== this.props.status){
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
 
-        return (<>
-            {
-                this.props.status !== null
-                    ? <div className={styles.statusBlock}>
-                        {this.state.editProfile
-                            ? <div><input onBlur={this.unactivateEditProfile.bind(this)} autoFocus type="text" value={this.props.status} /></div>
-                            : <div onDoubleClick={this.activateEditProfile.bind(this)}><span>{this.props.status}</span></div>
-                        }
+        return (
+            <div className={styles.statusBlock}>
+                {this.state.editProfile
+                    ? <div>
+                        <input onBlur={this.unactivateEditProfile.bind(this)} autoFocus type="text" value={this.state.status} onChange={this.onChangeStatus} />
                     </div>
-                    : <p>*нет статуса*</p>
-            }
-            
-        </>
+                    : <div onDoubleClick={this.activateEditProfile.bind(this)}>
+                        <span>{this.state.status || '*нет статуса*'}</span>
+                    </div>
+                }
+            </div>
         )
     }
 }
