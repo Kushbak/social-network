@@ -1,0 +1,10 @@
+.forChangingPages button{
+    font-size: 12px;
+    background: none;
+    border: none; 
+}
+
+.selectedPage{
+    font-weight: bold;
+    font-size: 16px;
+}
