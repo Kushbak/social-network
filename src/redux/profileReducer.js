@@ -9,7 +9,7 @@ let initialState = {
         { id: 3, message: 'It is my second post and I wanna experiment with it', likes: 10 },
         { id: 4, message: 'Like my post please', likes: 0 },
     ],
-    profile: null,
+    profile: {},
     status: null
 };
 
@@ -52,6 +52,7 @@ export const setStatusSuccess = (status) => ({ type: 'SET_STATUS', status });
 
 
 export const getUserProfile = (userId) => (dispatch) => {
+    dispatch(toggleIsFetching(true))
     usersApi.getUser(userId)
         .then(response => {
             dispatch(toggleIsFetching(false));
@@ -61,16 +62,13 @@ export const getUserProfile = (userId) => (dispatch) => {
 
 
 export const getStatus = (userId) => (dispatch) => {
-    debugger
     usersApi.getUserStatus(userId)
         .then(response => {
-            debugger
             dispatch(setStatusSuccess(response.data))
         });
 }
 
 export const updateStatus = (status) => (dispatch) => {
-    debugger
-    usersApi.updateStatus(status) 
+    usersApi.updateStatus(status)
 }
 

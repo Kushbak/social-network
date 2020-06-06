@@ -1,4 +1,5 @@
 import { authApi } from "../api/api";
+import { toggleIsFetching } from "./usersReducer";
 
 let initialState = {
     userId: null,
@@ -16,12 +17,12 @@ export const authReducer = (state = initialState, action) => {
                 ...action.payload
             }
         }        
-        case 'SET_USER_PROFILE': {
-            return {
-                ...state,
-                profile: action.profile
-            }
-        }
+        // case 'SET_USER_PROFILE': {
+        //     return {
+        //         ...state,
+        //         profile: action.profile
+        //     }
+        // }
         default:
             return state;
     }
@@ -44,10 +45,14 @@ export const authUserDataThunk = () => (dispatch) => {
         });
 }
 export const login = (email, password, rememberMe) => (dispatch) => {
+    dispatch(toggleIsFetching(true))
     authApi.login(email, password, rememberMe, true)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(authUserDataThunk())
+                dispatch(toggleIsFetching(false))
+            } else {
+                
             }
         });
 }
