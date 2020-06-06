@@ -4,7 +4,6 @@ import Preloader from '../../common/Preloader/Preloader';
 import defaultAva from '../../../assets/images/avatar.jpg'
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 const Description = (props) => {
-    debugger
     if (!props.profile) {
         return <Preloader />
     }
@@ -16,7 +15,7 @@ const Description = (props) => {
             </div>
             <div className={styles.aboutMe}>
                 <p className={styles.userName}>{props.profile.fullName}</p>
-                <ProfileStatus status={props.profile.lookingForAJobDescription} status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     );
