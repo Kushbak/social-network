@@ -1,19 +1,20 @@
-import React from 'react';
 import './App.css';
-import { Route, withRouter } from 'react-router-dom';
-import HeaderContainer from './components/Header/HeaderContainer';
-import Navbar from './components/Navbar/Navbar';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import News from './components/News/News';
-import Music from './components/Music/Music';
-import Settings from './components/Settings/Settings';
-import UsersContainer from './components/Users/UsersContainer';
-import Login from './components/Login/Login';
+import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { initializeApp } from './redux/appReducer'
+import { Route, withRouter } from 'react-router-dom';
+import { withSuspense } from './hoc/withSuspense'
+import HeaderContainer from './components/Header/HeaderContainer';
 import Prelodader from './components/common/Preloader/Preloader';
+import Settings from './components/Settings/Settings';
+import Navbar from './components/Navbar/Navbar';
+import Music from './components/Music/Music';
+import Login from './components/Login/Login';
+import News from './components/News/News';
+import ProfileContainer from './components/Profile/ProfileContainer'; 
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
  
 class App extends React.Component {
 
@@ -29,11 +30,11 @@ class App extends React.Component {
           return (
                <div className="app-wrapper">
                     <HeaderContainer />
-                    <Navbar />
+                    <Navbar isAuth={this.props.isAuth} />
                     <div className="app-wrapper-content">
                          <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
-                         <Route path='/dialogs' render={() => <DialogsContainer />} />
-                         <Route path='/users' render={() => <UsersContainer />} />
+                         <Route path='/dialogs' render={withSuspense(DialogsContainer)} />
+                         <Route path='/users' render={withSuspense(UsersContainer)} />
                          <Route path='/news' render={() => <News />} />
                          <Route path='/music' render={() => <Music />} />
                          <Route path='/settings' render={() => <Settings />} />
@@ -45,7 +46,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-     initialized: state.app.initialized
+     initialized: state.app.initialized,
+     isAuth: state.auth.isAuth
 })
 
 export default compose(
