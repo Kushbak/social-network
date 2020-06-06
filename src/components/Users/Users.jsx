@@ -2,25 +2,14 @@ import React from 'react';
 import css from './Users.module.css';
 import userAvatar from '../../assets/images/user.png'
 import Prelodader from '../common/Preloader/Preloader';
-import { NavLink } from 'react-router-dom'; 
+import { NavLink } from 'react-router-dom';
+import Paginator from '../common/Paginator/Paginator';
 
-const Users = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pagesSize)
-
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
-        return (<>
+const Users = (props) => { 
+    return (<>
+    <Paginator currentPage={props.currentPage} onChangeCurrentPage={props.onChangeCurrentPage} totalUsersCount={props.totalUsersCount} pagesSize={props.pagesSize} />
         {props.isFetching ? <Prelodader /> : null}
-        <div>
-            <div className={css.forChangingPages}>
-                {
-                    pages.map(p => {
-                        return <button onClick={(e) => { props.onChangeCurrentPage(p) }} className={props.currentPage === p && css.selectedPage}> {p} </button>
-                    })
-                }
-            </div>
+        <div> 
             {
                 props.users.map(u => <div key={u.id} className={css.block}>
 
@@ -30,8 +19,8 @@ const Users = (props) => {
                         </NavLink>
 
                         {u.isFollow
-                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} className={css.isFollowBtn} onClick={() => {props.unfollow(u.id)}}>Unfollow</button>
-                            : <button disabled={props.followingInProgress.some(id => id === u.id)} className={css.isUnfollowBtn} onClick={() => {props.follow(u.id)}}>Follow</button>}
+                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} className={css.isFollowBtn} onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)} className={css.isUnfollowBtn} onClick={() => { props.follow(u.id) }}>Follow</button>}
                     </div>
                     <div className={css.descrBlock}>
                         <div className={css.fullName}>{u.name}</div>
