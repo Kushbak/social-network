@@ -1,14 +1,13 @@
 import { usersApi } from '../api/api';
+import { updateObjectInArray } from '../utils/objectHelpers'
 
 let initialState = {
     users: [],
     pagesSize: 12,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true,
-    followingInProgress: [
-
-    ]
+    isFetching: false,
+    followingInProgress: []
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -16,22 +15,12 @@ export const usersReducer = (state = initialState, action) => {
         case 'FOLLOW':
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userID) {
-                        return { ...u, isFollow: true }
-                    }
-                    return u;
-                })
+                users: updateObjectInArray(state.users, action.userID, "id", {isFollow: true})
             }
         case 'UNFOLLOW':
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userID) {
-                        return { ...u, isFollow: false }
-                    }
-                    return u;
-                })
+                users: updateObjectInArray(state.users, action.userID, "id", {isFollow: false})
             }
         case 'SET-USERS': {
             return { ...state, users: action.users }
