@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 // NavLink - типа <a></a>, с e.preventDeafult и html api. Добавляет в url значение без перезагрузки
 // NavLink сам добавляет в активные ссылки active, а  activeClassName меняет ее на собственную, пример ниже
 
-let Navbar = () => {
+let Navbar = (props) => {
     return (
         <nav className={css.nav}>
             <div className={css.item}>
@@ -28,9 +28,9 @@ let Navbar = () => {
             <div className={css.item}>
                 <NavLink to="/settings" activeClassName={css.activeLink}>Settings</NavLink>
             </div>
-            <div className={css.item}>
-                <NavLink to="/login" activeClassName={css.activeLink}>Login</NavLink>
-            </div>
+            {!props.isAuth
+                ? <div className={css.item}><NavLink to="/login" activeClassName={css.activeLink}>Login</NavLink></div>
+                : null}
         </nav>
     )
 }
