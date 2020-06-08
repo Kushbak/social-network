@@ -4,15 +4,24 @@ import { connect } from 'react-redux';
 import { getStatus, updateStatus, getUserProfile } from '../../../redux/profileReducer'
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
+
 class DescriptionContainer extends React.Component {  
-    componentDidMount() {        
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.profile !== this.props.profile) {  
+            this.props.getUserProfile(this.props.userId);
+
+        }
+    }
+
+    componentDidMount() {      
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.userId;
         }
         this.props.getUserProfile(userId);
-        this.props.getStatus(userId)
+        this.props.getStatus(userId) 
     }
+
     render() { 
         return <Description {...this.props} />
     };
