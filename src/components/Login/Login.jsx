@@ -20,6 +20,11 @@ const LoginForm = (props) => {
             <div>
                 <button>{props.isFetching ? 'Loading...' : 'Login'}</button>
             </div>
+
+            {props.captchaUrl && <img src={props.captchaUrl} /> }
+            {/* what i skipped: Have to do a field for captcha, send captcha through login thunkCreator, add profile editor like status editor */}
+            {/* what i should do after first comment: Fix profile bugs, add validators for logging and add custom fields to FormControls  */}
+            {/* after all: Redo design, add new loader gif, add scroll pagination, remove music and news from navbar, add settings and dark theme, add search block for users */}
         </form>
     )
 }
@@ -38,14 +43,15 @@ const Login = (props) => {
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit} isFetching={props.isFetching}/>
+            <LoginReduxForm onSubmit={onSubmit} isFetching={props.isFetching} captchaUrl={props.captchaUrl} />
         </div>
     )
 }
 
 const mapStateToProps = state => ({ 
     isAuth: state.auth.isAuth,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    captchaUrl: state.auth.captchaUrl
 })
 
 export default connect(mapStateToProps, {login, logout})(Login);
