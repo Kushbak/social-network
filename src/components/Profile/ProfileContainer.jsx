@@ -1,30 +1,49 @@
 import React from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import { getUserProfile, getStatus } from '../../redux/profileReducer'; 
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { getStatus, updateStatus, getUserProfile } from '../../redux/profileReducer';
 import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 
-class ProfileContainer extends React.Component {
-    render() { 
-        return <Profile {...this.props} />
+class ProfileContainer extends React.Component {  
+    refreshProfile() {
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = this.props.myId;
+            if (!userId) {
+                this.props.history.push("/login");
+            }
+        }
+        this.props.getUserProfile(userId);
+        this.props.getStatus(userId);
+    }
+
+    componentDidMount() {
+        debugger
+        this.refreshProfile();
+    }
+
+    render() {
+        return <Profile { ...this.props } hasProfile={ !!this.props.profile } />
     };
 }
 
 const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        isAuth: state.auth.isAuth,
-        userId: state.auth.userId
+        myId: state.auth.userId,
+        isFetching: state.usersPage.isFetching,
+        status: state.profilePage.status
     }
-}; 
+};
 
 export default compose(
-    connect(mapStateToProps, { getUserProfile, getStatus }),
-    withAuthRedirect
-)(ProfileContainer); 
+    withRouter,
+    withAuthRedirect,
+    connect(mapStateToProps, { getStatus, updateStatus, getUserProfile })
+)(ProfileContainer);
 
 
 

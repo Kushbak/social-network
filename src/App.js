@@ -11,20 +11,20 @@ import Settings from './components/Settings/Settings';
 import Navbar from './components/Navbar/Navbar';
 import Music from './components/Music/Music';
 import Login from './components/Login/Login';
-import News from './components/News/News';
-import ProfileContainer from './components/Profile/ProfileContainer'; 
+import News from './components/News/News'; 
+import ProfileContainer from './components/Profile/ProfileContainer';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
- 
+
 class App extends React.Component {
 
-     componentDidMount(){
+     componentDidMount() {
           this.props.initializeApp();
-     }
+     } 
 
      render() {
-          if(!this.props.initialized) {
-               return <Prelodader />
+          if (!this.props.initialized) {
+          return <Prelodader />
           }
 
           return (
@@ -45,12 +45,14 @@ class App extends React.Component {
      }
 }
 
-const mapStateToProps = (state) => ({
-     initialized: state.app.initialized,
-     isAuth: state.auth.isAuth
-})
+const mapStateToProps = (state) => {
+     return {
+          initialized: state.app.initialized,
+          isAuth: state.auth.isAuth,
+     }
+}
 
 export default compose(
      withRouter,
-     connect(mapStateToProps, {initializeApp})
+     connect(mapStateToProps, { initializeApp })
 )(App);

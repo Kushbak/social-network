@@ -6,6 +6,7 @@ import { authReducer } from "./authReducer";
 import { reducer as formReducer } from "redux-form";
 import thunk from "redux-thunk";
 import { appReducer } from "./appReducer";
+import { composeWithDevTools } from "remote-redux-devtools";
 
 
 
@@ -18,6 +19,6 @@ let reducers = combineReducers({
     app: appReducer
 });
 
-let store  = createStore(reducers, applyMiddleware(thunk));
+let store  = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 window.store = store;
 export default store;
